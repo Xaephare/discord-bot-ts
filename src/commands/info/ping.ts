@@ -2,8 +2,8 @@ import { Command } from "../../structures/Command";
 
 export default new Command({
   name: "ping",
-  description: "Pong!",
+  description: "Returns the bot's ping in milliseconds",
   run: async ({ interaction }) => {
-    interaction.followUp("Pong!");
+    interaction.followUp(`${interaction.client.ws.ping}ms`);
   }
 });
