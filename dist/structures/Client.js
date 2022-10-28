@@ -9,6 +9,7 @@ const globPromise = (0, util_1.promisify)(glob_1.default);
 class ExtendedClient extends discord_js_1.Client {
     commands = new discord_js_1.Collection();
     constructor() {
+        // Intents 8 is Administrator permissions
         super({ intents: 8 });
     }
     start() {
