@@ -16,6 +16,7 @@ export class ExtendedClient extends Client {
   commands: Collection<string, CommandType> = new Collection();
 
   constructor() {
+    // Intents 8 is Administrator permissions
     super({ intents: 8 });
   }
 
@@ -58,7 +59,7 @@ export class ExtendedClient extends Client {
         guildId: process.env.guildId
       });
     });
-    
+
     // Events
     const eventFiles = await globPromise(`${__dirname}/../events/*{.ts,.js}`);
     eventFiles.forEach(async (filePath) => {
