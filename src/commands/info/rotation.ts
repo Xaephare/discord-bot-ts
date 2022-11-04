@@ -1,4 +1,4 @@
-import { Command } from "../../structures/Command";
+import {Command} from "../../structures/Command";
 
 export default new Command({
   name: "rotation",
@@ -32,6 +32,7 @@ export default new Command({
         const nextRanked = {
           map: data.ranked.next.map,
         };
+        console.log(timeConverter(currentBr.remainingMins));
         interaction.followUp(`
 __**Battle Royale**__
     *On now:*
@@ -51,3 +52,12 @@ __**Ranked**__
       });
   },
 });
+
+function timeConverter(minutes: number) {
+    if (minutes > 60) {
+        let hours: number = Math.floor(minutes / 60)
+        let remainderMinutes: number = minutes % 60
+
+        return [hours, remainderMinutes];
+    }
+}
