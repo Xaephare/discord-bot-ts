@@ -20,31 +20,30 @@ export default new Command({
         const data = response["data"];
         const currentBr = {
           map: data.battle_royale.current.map,
-          remainingMins: data.battle_royale.current.remainingMins,
+          remainingTime: data.battle_royale.current.remainingTimer.split(":", 2), //[Hours, Minutes]
         };
         const nextBr = {
           map: data.battle_royale.next.map,
         };
         const currentRanked = {
           map: data.ranked.current.map,
-          remainingMins: data.ranked.current.remainingMins,
+          remainingTime: data.ranked.current.remainingTimer.split(":", 2), //[Hours, Minutes]
         };
         const nextRanked = {
           map: data.ranked.next.map,
         };
-        console.log(timeConverter(currentBr.remainingMins));
         interaction.followUp(`
 __**Battle Royale**__
     *On now:*
     \`${currentBr.map}\`
     *Upcoming:*
-    \`${nextBr.map}\` in \`${currentBr.remainingMins}\` min
+    \`${nextBr.map}\` in \`${currentBr.remainingTime[0]}\` hours, \`${currentBr.remainingTime[1]}\` minutes
     
 __**Ranked**__
     *On now:*
     \`${currentRanked.map}\`
     *Upcoming:*
-    \`${nextRanked.map}\` in \`${currentRanked.remainingMins}\` min
+    \`${nextRanked.map}\` in \`${currentRanked.remainingTime[0]}\` hours, \`${currentRanked.remainingTime[1]}\` minutes
 `);
       })
       .catch((error) => {
@@ -52,12 +51,3 @@ __**Ranked**__
       });
   },
 });
-
-function timeConverter(minutes: number) {
-    if (minutes > 60) {
-        let hours: number = Math.floor(minutes / 60)
-        let remainderMinutes: number = minutes % 60
-
-        return [hours, remainderMinutes];
-    }
-}
