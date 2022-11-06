@@ -11,7 +11,7 @@ export const Rotation: Command = {
             method: "get",
             url: base_url + "maprotation",
             headers: {
-                Authorization: process.env.apexMapToken,
+                Authorization: process.env.APEXMAPTOKEN,
             },
             params: {
                 version: "2",
