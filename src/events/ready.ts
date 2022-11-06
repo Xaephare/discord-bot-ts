@@ -1,5 +1,14 @@
-import { Event } from "../structures/Event";
+import {Client} from "discord.js";
+import {Commands} from "../commands/Commands";
 
-export default new Event("ready", () => {
-  console.log("Bot is online!");
-});
+export default (client: Client): void => {
+    client.on("ready", async () => {
+        if (!client.user || !client.application) {
+            return;
+        }
+
+        await client.application.commands.set(Commands)
+
+        console.log(`${client.user.username} is online.`)
+    })
+}

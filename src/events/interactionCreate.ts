@@ -1,19 +1,23 @@
-import { ExtendedInteraction } from "../typings/Command";
-import { Event } from "../structures/Event";
-import { client } from "..";
-import { CommandInteractionOptionResolver } from "discord.js";
+import {CommandInteraction, Client, Interaction} from "discord.js";
+import interaction_create from "./interactionCreate";
+import {Commands} from "../commands/Commands";
 
-export default new Event("interactionCreate", async (interaction) => {
-  // Chat Input Commands
-  if (interaction.isCommand()) {
-    await interaction.deferReply();
-    const command = client.commands.get(interaction.commandName);
-    if (!command) return interaction.followUp("Command not found");
-
-    command.run({
-      args: interaction.options as CommandInteractionOptionResolver,
-      client,
-      interaction: interaction as ExtendedInteraction,
+export default (client: Client): void => {
+    client.on("interactionCreate", async (interaction: Interaction) => {
+        if (interaction.isCommand() || interaction.isContextMenuCommand()) {
+            await handleSlashCommand(client, interaction)
+        }
     });
-  }
-});
+};
+
+const handleSlashCommand = async (client: Client, interaction: CommandInteraction): Promise<void> => {
+    const slashCommand = Commands.find(c => c.name === interaction.commandName)
+    if (!slashCommand) {
+        interaction.followUp({content: "Command does not exist."})
+        return;
+    }
+
+    //await interaction.deferReply();
+
+    slashCommand.run(client, interaction);
+}

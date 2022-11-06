@@ -1,7 +1,5 @@
-import { CommandType } from "../typings/Command";
+import {ChatInputApplicationCommandData, Client, CommandInteraction} from "discord.js";
 
-export class Command {
-  constructor(commandOptions: CommandType) {
-    Object.assign(this, commandOptions);
-  }
+export interface Command extends ChatInputApplicationCommandData {
+    run: (client: Client, interaction: CommandInteraction) => void;
 }

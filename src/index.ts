@@ -1,6 +1,16 @@
-require("dotenv").config();
-import { ExtendedClient } from "./structures/Client";
+import {Client, ClientOptions} from "discord.js";
+import ready from "./events/ready";
+import interactionCreate from "./events/interactionCreate";
 
-export const client = new ExtendedClient();
+require('dotenv').config()
 
-client.start();
+console.log("Starting Bot...");
+
+const client = new Client({
+    intents: []
+});
+
+ready(client);
+interactionCreate(client)
+
+client.login(process.env.TOKEN);

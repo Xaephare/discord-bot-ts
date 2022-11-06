@@ -1,9 +1,15 @@
-import { Command } from "../../structures/Command";
+import {Command} from "../../structures/Command";
+import {Client, CommandInteraction} from "discord.js";
 
-export default new Command({
-  name: "ping",
-  description: "Displays Bot's ping.",
-  run: async ({ interaction }) => {
-    interaction.followUp(`${interaction.client.ws.ping}ms`);
-  }
-});
+export const Ping: Command = {
+    name: "ping",
+    description: "Displays bot ping.",
+    run: async (client: Client, interaction: CommandInteraction) => {
+        const content = `${interaction.client.ws.ping}ms`
+
+        await interaction.reply({
+            ephemeral: true,
+            content
+        })
+    }
+}
