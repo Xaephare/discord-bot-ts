@@ -13,11 +13,15 @@ export default (client: Client): void => {
 const handleSlashCommand = async (client: Client, interaction: CommandInteraction): Promise<void> => {
     const slashCommand = Commands.find(c => c.name === interaction.commandName)
     if (!slashCommand) {
-        interaction.followUp({content: "Command does not exist."})
+        console.error("Command does not exist.")
+        await interaction.reply({content: `Command "${interaction.commandName}" does not exist.`, ephemeral: true})
         return;
     }
-
-    //await interaction.deferReply();
-
-    slashCommand.run(client, interaction);
+    try {
+        await slashCommand.run(client, interaction)
+    }
+    catch (error) {
+        console.error(error)
+        await interaction.reply({content: "There was an error while executing this command."})
+    }
 }
