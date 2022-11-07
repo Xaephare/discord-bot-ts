@@ -1,4 +1,4 @@
-import {Command} from "../../structures/Command";
+import {Command} from "src/structures/Command";
 import {Client, CommandInteraction} from "discord.js";
 
 export const Ping: Command = {
