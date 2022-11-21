@@ -21,14 +21,14 @@ export const Rotation: Command = {
                 const data = response["data"];
                 const currentBr = {
                     map: data.battle_royale.current.map,
-                    remainingTime: data.battle_royale.current.remainingTimer.split(":", 2), //[Hours, Minutes]
+                    remainingTime: data.battle_royale.current.remainingSecs
                 };
                 const nextBr = {
                     map: data.battle_royale.next.map,
                 };
                 const currentRanked = {
                     map: data.ranked.current.map,
-                    remainingTime: data.ranked.current.remainingTimer.split(":", 2), //[Hours, Minutes]
+                    remainingTime: data.ranked.current.remainingSecs
                 };
                 const nextRanked = {
                     map: data.ranked.next.map,
@@ -38,17 +38,47 @@ __**Battle Royale**__
     *On now:*
     \`${currentBr.map}\`
     *Upcoming:*
-    \`${nextBr.map}\` in \`${currentBr.remainingTime[0]}\` hours, \`${currentBr.remainingTime[1]}\` minutes
+    \`${nextBr.map}\` ${stringify(currentBr.remainingTime)}
     
 __**Ranked**__
     *On now:*
     \`${currentRanked.map}\`
     *Upcoming:*
-    \`${nextRanked.map}\` in \`${currentRanked.remainingTime[0]}\` hours, \`${currentRanked.remainingTime[1]}\` minutes
+    \`${nextRanked.map}\` ${stringify(currentRanked.remainingTime)}
 `);
             })
             .catch((error: Error) => {
                 console.log(error);
             });
     },
+
+}
+
+function stringify(seconds: number): string {
+    const days = Math.floor(seconds / (3600 * 24));
+    const hours = Math.floor((seconds % (3600 * 24)) / 3600);
+    const minutes = Math.floor((seconds % 3600) / 60);
+
+    const dayWord = plurify("day", days);
+    const hourWord = plurify("hour", hours);
+    const minuteWord = plurify("minute", minutes);
+
+    if (days > 0) {
+        return `in \`${days}\` ${dayWord}, \`${hours}\` ${hourWord} and \`${minutes}\` ${minuteWord}`;
+    } else if (hours > 0) {
+        return `in \`${hours}\` ${hourWord} and \`${minutes}\` ${minuteWord}`;
+    } else if (minutes > 0 && hours === 0) {
+        return `in \`${minutes}\` ${minuteWord}`;
+    }
+    else {
+        return `in \`${seconds}\` seconds`;
+    }
+}
+
+function plurify(word: string, count: number): string {
+    if (count === 1) {
+        return word;
+    } else {
+        return word + "s";
+    }
 }
