@@ -1,0 +1,7 @@
+version: "3"
+services:
+  bot:
+    image: waifu
+    ports:
+      - "1337:1337"
+    restart: always
