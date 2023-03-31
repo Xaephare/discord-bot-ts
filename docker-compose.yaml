@@ -5,3 +5,8 @@ services:
     ports:
       - "1337:1337"
     restart: always
+  watchtower:
+    image: containrrr/watchtower
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    restart: always
