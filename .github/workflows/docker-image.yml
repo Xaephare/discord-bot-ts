@@ -9,6 +9,15 @@ on:
 jobs:
   docker:
     runs-on: ubuntu-latest
+    env:
+      TOKEN: ${{ secrets.TOKEN }}
+      TOKENTEST: ${{ secrets.TOKENTEST }}
+      GUILDID: ${{ secrets.GUILDID }}
+      APEXMAPTOKEN: ${{ secrets.APEXMAPTOKEN }}
+      DATABASETOKEN: ${{ secrets.DATABASETOKEN }}
+      DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+      DOCKER_REPO: ${{ secrets.DOCKER_REPO }}
+      DOCKER_TOKEN: ${{ secrets.DOCKER_TOKEN }}
     steps:
       -
         name: Checkout
