@@ -12,7 +12,7 @@ RUN npm install
 # Copy files
 COPY . .
 
-# Add arguments
+# Define arguments
 ARG TOKEN
 ARG TOKENTEST
 ARG GUILDID

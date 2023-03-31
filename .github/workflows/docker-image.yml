@@ -9,15 +9,6 @@ on:
 jobs:
   docker:
     runs-on: ubuntu-latest
-    env:
-      TOKEN: ${{ secrets.TOKEN }}
-      TOKENTEST: ${{ secrets.TOKENTEST }}
-      GUILDID: ${{ secrets.GUILDID }}
-      APEXMAPTOKEN: ${{ secrets.APEXMAPTOKEN }}
-      DATABASETOKEN: ${{ secrets.DATABASETOKEN }}
-      DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
-      DOCKER_REPO: ${{ secrets.DOCKER_REPO }}
-      DOCKER_TOKEN: ${{ secrets.DOCKER_TOKEN }}
     steps:
       -
         name: Checkout
@@ -41,12 +32,12 @@ jobs:
           platforms: linux/arm/v7
           tags: ${{ secrets.DOCKER_USERNAME }}/waifubot:latest
           build-args: |
-            TOKEN=${TOKEN}
-            TOKENTEST=${TOKENTEST}
-            GUILDID=${GUILDID}
-            APEXMAPTOKEN=${APEXMAPTOKEN}
-            DATABASETOKEN=${DATABASETOKEN}
-            DOCKER_USERNAME=${DOCKER_USERNAME}
-            DOCKER_REPO=${DOCKER_REPO}
-            DOCKER_TOKEN=${DOCKER_TOKEN}
+            TOKEN=${{ secrets.TOKEN }}
+            TOKENTEST=${{ secrets.TOKENTEST }}
+            GUILDID=${{ secrets.GUILDID }}
+            APEXMAPTOKEN=${{ secrets.APEXMAPTOKEN }}
+            DATABASETOKEN=${{ secrets.DATABASETOKEN }}
+            DOCKER_USERNAME=${{ secrets.DOCKER_USERNAME }}
+            DOCKER_REPO=${{ secrets.DOCKER_REPO }}
+            DOCKER_TOKEN=${{ secrets.DOCKER_TOKEN }}
           
