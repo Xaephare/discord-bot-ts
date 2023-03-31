@@ -35,17 +35,18 @@ jobs:
         name: Build and push
         uses: docker/build-push-action@v4
         with:
+          context: .
           file: ./Dockerfile
           push: true
-          platforms: linux/amd64,linux/arm64,linux/arm/v7
+          platforms: linux/arm/v7
           tags: ${{ secrets.DOCKER_USERNAME }}/waifubot:latest
           build-args: |
-            TOKEN=${{ secrets.TOKEN }}
-            TOKENTEST=${{ secrets.TOKENTEST }}
-            GUILDID=${{ secrets.GUILDID }}
-            APEXMAPTOKEN=${{ secrets.APEXMAPTOKEN }}
-            DATABASETOKEN=${{ secrets.DATABASETOKEN }}
-            DOCKER_USERNAME=${{ secrets.DOCKER_USERNAME }}
-            DOCKER_REPO=${{ secrets.DOCKER_REPO }}
-            DOCKER_TOKEN=${{ secrets.DOCKER_TOKEN }}
+            TOKEN=${TOKEN}
+            TOKENTEST=${TOKENTEST}
+            GUILDID=${GUILDID}
+            APEXMAPTOKEN=${APEXMAPTOKEN}
+            DATABASETOKEN=${DATABASETOKEN}
+            DOCKER_USERNAME=${DOCKER_USERNAME}
+            DOCKER_REPO=${DOCKER_REPO}
+            DOCKER_TOKEN=${DOCKER_TOKEN}
           
