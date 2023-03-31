@@ -28,5 +28,6 @@ jobs:
         with:
           file: ./Dockerfile
           push: true
+          platforms: linux/arm/v7
           tags: ${{ secrets.DOCKER_USERNAME }}/waifubot:latest
           
