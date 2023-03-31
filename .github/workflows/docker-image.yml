@@ -37,6 +37,15 @@ jobs:
         with:
           file: ./Dockerfile
           push: true
-          platforms: linux/arm/v7
+          platforms: linux/amd64,linux/arm64,linux/arm/v7
           tags: ${{ secrets.DOCKER_USERNAME }}/waifubot:latest
+          build-args: |
+            TOKEN=${{ secrets.TOKEN }}
+            TOKENTEST=${{ secrets.TOKENTEST }}
+            GUILDID=${{ secrets.GUILDID }}
+            APEXMAPTOKEN=${{ secrets.APEXMAPTOKEN }}
+            DATABASETOKEN=${{ secrets.DATABASETOKEN }}
+            DOCKER_USERNAME=${{ secrets.DOCKER_USERNAME }}
+            DOCKER_REPO=${{ secrets.DOCKER_REPO }}
+            DOCKER_TOKEN=${{ secrets.DOCKER_TOKEN }}
           
