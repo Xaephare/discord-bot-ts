@@ -15,7 +15,7 @@ const client = new Client({
 ready(client);
 interactionCreate(client);
 
-client.login(TOKENTEST);
+client.login(TOKEN);
 
 connect(DATABASETOKEN!).catch(console.error);
 //TODO: run event handler on startup
