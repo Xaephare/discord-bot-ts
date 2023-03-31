@@ -1,7 +1,7 @@
 version: "3"
 services:
   app:
-    image: waifubot:latest
+    image: ${DOCKER_USERNAME}/${DOCKER_REPO}:latest
     ports:
       - "1337:1337"
     restart: always
