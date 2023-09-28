@@ -1,5 +1,4 @@
 const fs = require("fs");
-const { connection } = require("mongoose");
 
 module.exports = async (client: any) => {
   const eventFolders = fs.readdirSync("./src/events");
@@ -22,21 +21,6 @@ module.exports = async (client: any) => {
             );
         }
         break;
-
-      case "mongo":
-        for (const file of eventFiles) {
-          const event = require(`../events/${folder}/${file}`);
-          if (event.once)
-            connection.once(event.name, (...args: any) =>
-              event.execute(...args, client)
-            );
-          else
-            connection.on(event.name, (...args: any) =>
-              event.execute(...args, client)
-            );
-        }
-        break;
-
       default:
         break;
     }
