@@ -14,4 +14,4 @@ const client = new Client({
 ready(client);
 interactionCreate(client);
 
-client.login(TOKENTEST);
+client.login(TOKEN);
